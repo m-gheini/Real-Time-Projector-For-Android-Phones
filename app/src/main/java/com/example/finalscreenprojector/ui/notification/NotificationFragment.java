@@ -1,4 +1,4 @@
-package com.example.finalscreenprojector.ui.slideshow;
+package com.example.finalscreenprojector.ui.notification;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.finalscreenprojector.R;
 
-public class SlideshowFragment extends Fragment {
+public class NotificationFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private NotificationViewModel notificationViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        notificationViewModel =
+                new ViewModelProvider(this).get(NotificationViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_notification, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        notificationViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

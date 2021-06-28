@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_drawing" />
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.finalscreenprojector.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.example.finalscreenprojector.ui.notification.NotificationFragment"
+        android:label="@string/menu_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

@@ -9,7 +9,6 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="menu_drawing">Drawing</string>
     <string name="menu_notification">Notification</string>
 </resources>
