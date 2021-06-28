@@ -72,28 +72,9 @@ public class DrawingFragment extends Fragment {
             public void onClick(View view) {
                 Bitmap bmp = paint.save();
                 System.out.println("#####################");
-                System.out.println(bmp);
-                NetworkThread networkThread = new NetworkThread(bmp);
+                NetworkThread networkThread = new NetworkThread(bmp, "drawing");
                 networkThread.start();
                 System.out.println("out of thread...");
-
-//                OutputStream imageOutStream = null;
-//                ContentValues cv = new ContentValues();
-//                cv.put(MediaStore.Images.Media.DISPLAY_NAME,"drawing.png");
-//                cv.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
-//                //TODO send it via wifi to arduino board
-//                cv.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
-//                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, cv);
-//                try {
-//                    imageOutStream = getContentResolver().openOutputStream(uri);
-//                    bmp.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream);
-//                    imageOutStream.close();
-//
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
             }
         });
         stroke.setOnClickListener(new View.OnClickListener() {

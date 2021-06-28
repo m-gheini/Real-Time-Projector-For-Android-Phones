@@ -17,15 +17,17 @@ import java.net.UnknownHostException;
 public class NetworkThread extends Thread{
     private Bitmap bmp;
     private final int RED = -65536;
-    public NetworkThread(Bitmap bitmap){
+    private final int BLACK = -16777216;
+    private String type;
+    public NetworkThread(Bitmap bitmap, String type){
         bmp = bitmap;
+        this.type = type;
     }
     public int[][] rescalePicture(int[][]pixels){
         int[][] returnVal = new int[32][8];
         int[][] reduceColumns = new int[32*40][8];
         for(int i = 0; i<=40*32; i += 1){
             if(i%40==0 && i!=0){
-                System.out.println("multiply of 20: "+i);
                 for(int z = 0; z<8; z += 1){
                     int temp = reduceColumns[i-40][z]+reduceColumns[i-39][z]+reduceColumns[i-38][z]+
                             reduceColumns[i-37][z]+reduceColumns[i-36][z]+reduceColumns[i-35][z]+
@@ -76,11 +78,21 @@ public class NetworkThread extends Thread{
             for(int i = 0; i< bmp.getHeight(); i += 1){
                 for(int j = 0; j<bmp.getWidth(); j += 1){
                     int index = i*bmp.getWidth()+j;
-                    if(pixels[index]==RED) {
-                        bitmapMatrix[i][j] = 0;
+                    if(type=="drawing") {
+                        if (pixels[index] == RED) {
+                            bitmapMatrix[i][j] = 0;
+                        } else {
+                            bitmapMatrix[i][j] = 1;
+                        }
                     }
-                    else {
-                        bitmapMatrix[i][j] = 1;
+                    else{
+                        if(type=="image"){
+                            if (pixels[index] == BLACK) {
+                                bitmapMatrix[i][j] = 0;
+                            } else {
+                                bitmapMatrix[i][j] = 1;
+                            }
+                        }
                     }
 
                 }

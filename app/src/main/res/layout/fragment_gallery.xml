@@ -8,18 +8,25 @@
     android:orientation="vertical"
     tools:context=".ui.gallery.GalleryFragment">
     <LinearLayout
+        android:background="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:id="@+id/image_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="0dp"
             android:text="select image"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textColor="@color/black" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/btn_save"
+            android:layout_weight="1"
+            android:src="@drawable/ic_send"
+            android:text="Save"/>
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
