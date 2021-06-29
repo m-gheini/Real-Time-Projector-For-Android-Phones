@@ -89,7 +89,6 @@ public class NetworkThread extends Thread{
                 for(int j = 0; j<bmp.getWidth(); j += 1){
                     int index = i*bmp.getWidth()+j;
                     if(type=="drawing") {
-                        System.out.println(Color.red(pixels[index])+","+Color.green(pixels[index])+","+Color.blue(pixels[index]));
                         if (pixels[index] == RED) {
                             bitmapMatrix[i][j] = 0;
                         } else {
