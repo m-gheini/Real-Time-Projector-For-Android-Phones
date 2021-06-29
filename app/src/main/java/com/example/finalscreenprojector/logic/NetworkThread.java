@@ -19,42 +19,51 @@ public class NetworkThread extends Thread{
     private final int RED = -65536;
     private final int BLACK = -16777216;
     private String type;
+    private int scale;
     public NetworkThread(Bitmap bitmap, String type){
         bmp = bitmap;
         this.type = type;
     }
     public int[][] rescalePicture(int[][]pixels){
         int[][] returnVal = new int[32][8];
-        int[][] reduceColumns = new int[32*40][8];
-        for(int i = 0; i<=40*32; i += 1){
-            if(i%40==0 && i!=0){
+        int[][] reduceColumns = new int[32*scale][8];
+        for(int i = 0; i<=scale*32; i += 1){
+            if(i%scale==0 && i!=0){
                 for(int z = 0; z<8; z += 1){
-                    int temp = reduceColumns[i-40][z]+reduceColumns[i-39][z]+reduceColumns[i-38][z]+
-                            reduceColumns[i-37][z]+reduceColumns[i-36][z]+reduceColumns[i-35][z]+
-                            reduceColumns[i-34][z]+reduceColumns[i-33][z]+reduceColumns[i-32][z]+
-                            reduceColumns[i-31][z]+reduceColumns[i-30][z]+reduceColumns[i-29][z]+
-                            reduceColumns[i-28][z]+reduceColumns[i-27][z]+reduceColumns[i-26][z]+
-                            reduceColumns[i-25][z]+reduceColumns[i-24][z]+reduceColumns[i-23][z]+
-                            reduceColumns[i-22][z]+reduceColumns[i-21][z]+
-                            reduceColumns[i-20][z]+reduceColumns[i-19][z]+reduceColumns[i-18][z]+
-                            reduceColumns[i-17][z]+reduceColumns[i-16][z]+reduceColumns[i-15][z]+
-                            reduceColumns[i-14][z]+reduceColumns[i-13][z]+reduceColumns[i-12][z]+
-                            reduceColumns[i-11][z]+reduceColumns[i-10][z]+reduceColumns[i-9][z]+
-                            reduceColumns[i-8][z]+reduceColumns[i-7][z]+reduceColumns[i-6][z]+
-                            reduceColumns[i-5][z]+reduceColumns[i-4][z]+reduceColumns[i-3][z]+
-                            reduceColumns[i-2][z]+reduceColumns[i-1][z];
-                    if(temp>=800)
-                        returnVal[i/40-1][z] = 1;
+                    int temp=0;
+                    if(scale==40) {
+                        temp = reduceColumns[i - 40][z] + reduceColumns[i - 39][z] + reduceColumns[i - 38][z] +
+                                reduceColumns[i - 37][z] + reduceColumns[i - 36][z] + reduceColumns[i - 35][z] +
+                                reduceColumns[i - 34][z] + reduceColumns[i - 33][z] + reduceColumns[i - 32][z] +
+                                reduceColumns[i - 31][z] + reduceColumns[i - 30][z] + reduceColumns[i - 29][z] +
+                                reduceColumns[i - 28][z] + reduceColumns[i - 27][z] + reduceColumns[i - 26][z] +
+                                reduceColumns[i - 25][z] + reduceColumns[i - 24][z] + reduceColumns[i - 23][z] +
+                                reduceColumns[i - 22][z] + reduceColumns[i - 21][z] +
+                                reduceColumns[i - 20][z] + reduceColumns[i - 19][z] + reduceColumns[i - 18][z] +
+                                reduceColumns[i - 17][z] + reduceColumns[i - 16][z] + reduceColumns[i - 15][z] +
+                                reduceColumns[i - 14][z] + reduceColumns[i - 13][z] + reduceColumns[i - 12][z] +
+                                reduceColumns[i - 11][z] + reduceColumns[i - 10][z] + reduceColumns[i - 9][z] +
+                                reduceColumns[i - 8][z] + reduceColumns[i - 7][z] + reduceColumns[i - 6][z] +
+                                reduceColumns[i - 5][z] + reduceColumns[i - 4][z] + reduceColumns[i - 3][z] +
+                                reduceColumns[i - 2][z] + reduceColumns[i - 1][z];
+                    }
+                    else{
+                        for(int t=scale;t>0;t--){
+                            temp+=reduceColumns[i-t][z];
+                        }
+                    }
+                    if (temp >= (scale*scale)/2)
+                        returnVal[i / scale - 1][z] = 1;
                     else
-                        returnVal[i/40-1][z] = 0;
+                        returnVal[i / scale - 1][z] = 0;
                 }
-                if(i==40*32)
+                if(i==scale*32)
                     return returnVal;
             }
             for (int j = 0; j<8; j += 1){
                 int count=0;
-                for(int k = 0; k<40; k += 1){
-                    if(pixels[i][j*40+k] == 0){
+                for(int k = 0; k<scale; k += 1){
+                    if(pixels[i][j*scale+k] == 0){
                         count+=1;
                     }
                     else
@@ -74,6 +83,7 @@ public class NetworkThread extends Thread{
             int[] pixels = new int[bmp.getWidth()*bmp.getHeight()];
             int[][] bitmapMatrix = new int[bmp.getHeight()][bmp.getWidth()];
             int rows=0;
+            scale = bmp.getWidth()/8;
             bmp.getPixels(pixels, 0, bmp.getWidth(), 0, 0, bmp.getWidth(), bmp.getHeight());
             for(int i = 0; i< bmp.getHeight(); i += 1){
                 for(int j = 0; j<bmp.getWidth(); j += 1){
