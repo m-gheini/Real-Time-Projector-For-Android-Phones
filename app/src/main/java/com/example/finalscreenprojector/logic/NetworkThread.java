@@ -79,6 +79,7 @@ public class NetworkThread extends Thread{
                 for(int j = 0; j<bmp.getWidth(); j += 1){
                     int index = i*bmp.getWidth()+j;
                     if(type=="drawing") {
+                        System.out.println(Color.red(pixels[index])+","+Color.green(pixels[index])+","+Color.blue(pixels[index]));
                         if (pixels[index] == RED) {
                             bitmapMatrix[i][j] = 0;
                         } else {
@@ -87,7 +88,11 @@ public class NetworkThread extends Thread{
                     }
                     else{
                         if(type=="image"){
-                            if (pixels[index] == BLACK) {
+                            float red = Color.red(pixels[index]);
+                            float green = Color.green(pixels[index]);
+                            float blue = Color.blue(pixels[index]);
+                            float avg = (red+green+blue)/3;
+                            if (avg>=127.5) {
                                 bitmapMatrix[i][j] = 0;
                             } else {
                                 bitmapMatrix[i][j] = 1;
