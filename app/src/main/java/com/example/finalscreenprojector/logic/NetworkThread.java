@@ -92,7 +92,7 @@ public class NetworkThread extends Thread{
                             float green = Color.green(pixels[index]);
                             float blue = Color.blue(pixels[index]);
                             float avg = (red+green+blue)/3;
-                            if (avg>=127.5) {
+                            if (avg<=127.5) {
                                 bitmapMatrix[i][j] = 0;
                             } else {
                                 bitmapMatrix[i][j] = 1;
