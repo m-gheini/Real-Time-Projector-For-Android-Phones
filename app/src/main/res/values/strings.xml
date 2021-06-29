@@ -11,4 +11,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_drawing">Drawing</string>
     <string name="menu_notification">Notification</string>
+    <string name="notification_access_intent">
+        "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"</string>
 </resources>
