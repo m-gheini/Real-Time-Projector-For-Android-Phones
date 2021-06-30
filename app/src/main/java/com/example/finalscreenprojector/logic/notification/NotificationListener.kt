@@ -21,12 +21,8 @@ class NotificationListener : NotificationListenerService() {
         val sharedPref: SharedPreferences = application.applicationContext.getSharedPreferences(
                 "cps", Context.MODE_PRIVATE)
         val packageName: String = sbn?.packageName ?: ""
-//        if(sharedPref.getBoolean("notificationModeActivated", false) && packageName in listOf(
-//                        "org.telegram.messenger", "com.google.android.apps.messaging",
-//                        "com.whatsapp")) {
             MainActivity.updateTextView(packageName, mainActivity)
             val sender = Sender().execute(packageName)
-//        }
     }
 
     class Sender : AsyncTask<String, Void, Unit>() {
